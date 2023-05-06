@@ -19,6 +19,10 @@ from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
 from reportlab.lib.enums import TA_CENTER, TA_LEFT, TA_JUSTIFY
 from reportlab.lib.utils import ImageReader
 
+# Importación de librería de Python
+import os
+
+
 class ReportFinancial:
     
     def __init__(self, stock, start, end, weights, investment):
@@ -48,8 +52,12 @@ class ReportFinancial:
         
         author = 'Sebastian Marat Urdanegui Bisalaya'
 
-        pdf = SimpleDocTemplate(r'C:\Users\Fabrizio\Documents\PortfolioProjects\py-portfolio-analytics-library\template\pdfs\report.pdf',
-                                pagesize = A4)
+        proyect_directory = os.getcwd()
+        path_dir = os.path.join(proyect_directory, 'pdfs')
+        os.makedirs(path_dir, exist_ok=True)
+        report_path = 'report.pdf'
+        report_paths = os.path.join(path_dir, report_path)
+        pdf = SimpleDocTemplate(report_paths, pagesize = A4)
         estilos = getSampleStyleSheet()
         estilo_titulo = ParagraphStyle(name = 'centrado', parent = estilos['Title'],
                                     alignment = TA_CENTER)
@@ -201,6 +209,6 @@ class ReportFinancial:
         pdf.build(pdf_title + pdf_content)
         
 
-# if __name__ == '__main__':
-#     reporte = ReportFinancial(["AAPL", "AMZN", "META", "TSLA", "AMD", "NFLX"], '2022-01-01', '2023-01-01', [0.2,0.2,0.3, 0.1, 0.1, 0.1], 1000000)
-#     reporte.report()
+if __name__ == '__main__':
+    reporte = ReportFinancial(["AAPL", "AMZN", "META", "TSLA", "AMD", "NFLX"], '2022-01-01', '2023-01-01', [0.2,0.2,0.3, 0.1, 0.1, 0.1], 1000000)
+    reporte.report()
