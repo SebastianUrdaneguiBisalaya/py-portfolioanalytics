@@ -12,4 +12,4 @@ from functions.functions import return_positive_negative
 from functions.functions import BuySellStocks
 
 # Importar la clase encargada de construir el reporte
-from main import ReportFinancial
+#from main import ReportFinancial
