@@ -10,3 +10,6 @@ from functions.functions import plot_covariance_matrix
 from functions.functions import plot_correlation_matrix
 from functions.functions import return_positive_negative
 from functions.functions import BuySellStocks
+
+# Importar la clase encargada de construir el reporte
+from main import ReportFinancial
