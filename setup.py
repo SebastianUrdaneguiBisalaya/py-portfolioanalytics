@@ -4,7 +4,7 @@ from setuptools import find_packages, setup
 HERE = pathlib.Path(__file__).parent
 
 VERSION = '0.0.1'
-PACKAGE_NAME = 'py-portfolio-analytics'
+PACKAGE_NAME = 'py_portfolio_analytics'
 AUTHOR = 'Sebastian Marat Urdanegui Bisalaya'
 AUTHOR_EMAIL = 'sebasurdanegui@gmail.com'
 URL = 'https://github.com/SebastianUrdaneguiBisalaya/py-portfolioanalytics'
