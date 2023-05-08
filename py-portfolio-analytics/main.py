@@ -209,6 +209,6 @@ class ReportFinancial:
         pdf.build(pdf_title + pdf_content)
         
 
-if __name__ == '__main__':
-    reporte = ReportFinancial(["AAPL", "AMZN", "META", "TSLA", "AMD", "NFLX"], '2022-01-01', '2023-01-01', [0.2,0.2,0.3, 0.1, 0.1, 0.1], 1000000)
-    reporte.report()
+# if __name__ == '__main__':
+#     reporte = ReportFinancial(["AAPL", "AMZN", "META", "TSLA", "AMD", "NFLX"], '2022-01-01', '2023-01-01', [0.2,0.2,0.3, 0.1, 0.1, 0.1], 1000000)
+#     reporte.report()

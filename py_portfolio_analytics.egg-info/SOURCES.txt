@@ -1,0 +1,10 @@
+LICENSE
+README.md
+setup.py
+py-portfolio-analytics/__init__.py
+py-portfolio-analytics/main.py
+py_portfolio_analytics.egg-info/PKG-INFO
+py_portfolio_analytics.egg-info/SOURCES.txt
+py_portfolio_analytics.egg-info/dependency_links.txt
+py_portfolio_analytics.egg-info/requires.txt
+py_portfolio_analytics.egg-info/top_level.txt
