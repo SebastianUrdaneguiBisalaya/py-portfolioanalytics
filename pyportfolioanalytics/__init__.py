@@ -1,3 +1,13 @@
+from pyportfolioanalytics.utils import stock_price_close
+from pyportfolioanalytics.utils import get_name_columns
+from pyportfolioanalytics.utils import return_daily
+from pyportfolioanalytics.utils import covariance_matrix
+from pyportfolioanalytics.utils import plot_price_close
+from pyportfolioanalytics.utils import histogram_yield
+from pyportfolioanalytics.utils import plot_yield_deviation_mean
+from pyportfolioanalytics.utils import plot_cov_matrix
+from pyportfolioanalytics.utils import plot_corr_matrix
+from pyportfolioanalytics.utils import plot_logarithmic_yield
 from pyportfolioanalytics.utils import get_stock_price_close
 from pyportfolioanalytics.utils import get_name_columns
 from pyportfolioanalytics.utils import get_date_start
@@ -10,4 +20,3 @@ from pyportfolioanalytics.utils import plot_correlation_matrix
 from pyportfolioanalytics.utils import return_positive_negative
 from pyportfolioanalytics.utils import BuySellStocks
 from pyportfolioanalytics.utils import ReportFinancial
-

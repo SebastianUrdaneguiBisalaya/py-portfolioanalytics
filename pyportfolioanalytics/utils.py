@@ -64,6 +64,134 @@ def return_positive_negative(value):
         return 'pérdida'
     elif value >= 0:
         return 'ganancia'
+    
+# Funciones para graficar el análisis financiero y mostrar en el IDE 
+# no almacenarlo en directorio
+def get_plot_price_close(func):
+    def wrapper(*args, **kwargs):
+        stock_dataframe = func(*args, **kwargs)
+        orange_color = sns.color_palette("YlOrBr", as_cmap = False, n_colors=5)
+        sns.set_palette(orange_color)
+        fig, ax = plt.subplots(figsize = (8,6), dpi = 80)
+        stock_dataframe.plot(ax = ax)
+        plt.legend()
+        plt.title("Evolución del precio de cierre de las acciones", size = 15)
+        plt.xlabel("Fecha")
+        plt.ylabel("Precio de las acciones")
+        for i in ['bottom', 'left']:
+            ax.spines[i].set_color('black')
+            ax.spines[i].set_linewidth(1.5) 
+        right_side = ax.spines["right"]
+        right_side.set_visible(False)
+        top_side = ax.spines["top"]
+        top_side.set_visible(False)
+        ax.set_axisbelow(True)
+        ax.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
+        plt.show()
+    return wrapper
+
+@get_plot_price_close
+def plot_price_close(stock_list, start = '2022-01-01', end = '2023-01-01'):
+    stock_dataframe = pd.DataFrame()
+    for stock in stock_list:
+        data = yf.download(stock, start = start, end = end, progress = False)
+        stock_dataframe[stock] = data["Close"]
+    return stock_dataframe
+
+def histogram_yield(list_stocks, start = '2022-01-01', end = '2023-01-01'):
+    return_stock = return_daily(list_stock = list_stocks, start = start, end = end)
+    red_color = sns.cubehelix_palette(start=2,rot=0, dark=0, light=.95)
+    sns.set_palette(red_color)
+    fig, ax = plt.subplots(figsize = (8,6), dpi = 80)
+    for i in return_stock.columns.values:
+        plt.hist(return_stock[i], label = i, bins = 100)
+    plt.legend()
+    for i in ['bottom', 'left']:
+            ax.spines[i].set_color('black')
+            ax.spines[i].set_linewidth(1.5) 
+    right_side = ax.spines["right"]
+    right_side.set_visible(False)
+    top_side = ax.spines["top"]
+    top_side.set_visible(False)
+    ax.set_axisbelow(True)
+    ax.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
+    plt.title(f"Histograma del rendimiento\nlogarítmico de las acciones", size = 15)
+    plt.xlabel("Rendimiento")
+    plt.ylabel("Frecuencia")
+    plt.show()
+    
+def plot_yield_deviation_mean(list_stocks, start = '2022-01-01', end = '2023-01-01'):
+    return_stock = pd.DataFrame(return_daily(list_stock = list_stocks, start = start, end = end).mean()).rename(columns = {
+        0:'Rendimiento promedio anualizado %'
+    }).reset_index()
+    return_stock = return_stock.rename(columns = {'index':"Acción"})
+    return_stock["Rendimiento promedio anualizado %"] = return_stock["Rendimiento promedio anualizado %"]
+    std_stock = pd.DataFrame(return_daily(list_stock = list_stocks, start = start, end = end).var()).rename(columns = {
+        0:'Desviación estándar %'
+    }).reset_index()
+    std_stock = std_stock.rename(columns = {'index':'Acción'})
+    df = pd.merge(return_stock, std_stock, on = "Acción", how = 'left')
+    df = df.set_index("Acción")
+    df["Rendimiento promedio anualizado %"] = df["Rendimiento promedio anualizado %"] * 252 * 100
+    df["Desviación estándar %"] = df["Desviación estándar %"] * 252
+    df["Desviación estándar anualizada %"] = df["Desviación estándar %"].apply(lambda x : math.sqrt(x)*100)
+    
+    fig, ax1 = plt.subplots(figsize = (8,6), dpi = 80)
+    ax1.bar(df.index, df["Rendimiento promedio anualizado %"], color = 'tab:blue', alpha = 0.8)
+    ax1.set_ylabel('Rendimiento promedio %')
+    ax2 = ax1.twinx()
+    ax2.plot(df.index, df["Desviación estándar anualizada %"],linewidth = 4, color = 'tab:orange', alpha = 0.8)
+    ax2.set_ylabel('Desviación estándar %')
+    
+    for i in ['bottom', 'left']:
+        ax2.spines[i].set_color('black')
+        ax2.spines[i].set_linewidth(1.5) 
+    right_side = ax2.spines["right"]
+    right_side.set_visible(False)
+    top_side = ax2.spines["top"]
+    top_side.set_visible(False)
+    ax2.set_axisbelow(True)
+    ax2.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
+    plt.title(f'Rendimiento promedio y volatilidad anualizada\nde las acciones', size = 15)
+    plt.show()
+
+def plot_cov_matrix(list_stock, start = '2022-01-01', end = '2023-01-01'):
+    covmatrix = covariance_matrix(list_stock, start = start, end = end)
+    fig, ax = plt.subplots(figsize = (15,8), dpi = 80)
+    plt.title("Matriz de varianza y covarianza", size = 15)
+    ax = sns.heatmap(covmatrix, cmap = 'Blues', annot = True)
+    plt.show()
+    
+
+def plot_corr_matrix(list_stock, start = '2022-01-01', end = '2023-01-01'):
+    return_stock = return_daily(list_stock, start = start, end = end)
+    fig, ax = plt.subplots(figsize = (15,8), dpi = 80)
+    ax = sns.heatmap(data = return_stock.corr(), annot = True, cmap = 'YlGnBu')
+    plt.title("Matriz de Correlación", size = 15)
+    plt.show()
+    
+
+def plot_logarithmic_yield(list_stock, start = '2022-01-01', end = '2023-01-01'):
+    return_stocks = return_daily(list_stock = list_stock, start = start, end = end)
+    dark_color = sns.dark_palette("#69d", reverse = True, as_cmap = False, n_colors=5)
+    sns.set_palette(dark_color)
+    fig, ax = plt.subplots(figsize = (8,6), dpi = 80)
+    return_stocks.plot(ax = ax)
+    plt.xlabel("Fecha")
+    plt.ylabel("Rendimiento logarítmico")
+    plt.title("Evolución del rendimiemto logarítmico de las acciones", size = 15)
+    for i in ['bottom', 'left']:
+        ax.spines[i].set_color('black')
+        ax.spines[i].set_linewidth(1.5) 
+    right_side = ax.spines["right"]
+    right_side.set_visible(False)
+    top_side = ax.spines["top"]
+    top_side.set_visible(False)
+    ax.set_axisbelow(True)
+    ax.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
+    plt.legend()
+    plt.show()
+
 
 # Funciones para graficar el análisis financiero
 def plot_stock_price_close(func):

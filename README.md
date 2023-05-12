@@ -14,8 +14,13 @@
 <br>
 
 ### **1. El camino más directo**
-El camino más directo es usar la platforma Google Colab [Clic aquí para usar Google Colab](https://colab.research.google.com/).
+El camino más directo es usar la platforma Google Colab [Clic aquí para usar Google Colab](https://colab.research.google.com/). Google Colaboratory es un cuaderno de trabajo de Jupyter almacenado en la nube que te permite escribir código en Python y procesarlo de forma ágil. **Solo necesitas tener una cuenta de Google Gmail para acceder.**
 
+Al hacer clic en el enlace, obtendrás como output el entorno de Google Colab:
+
+<img src = "./images/introduce_google_colab.png" width = "100%" height = "60px">
+
+Deberás hacer clic en el botón <span style = "color:orange">**Conectar**<span> <span style = "color:white">para encender la máquina virtual de Google Colaboratory y poder 
 <br>
 
 ```python
