@@ -1,6 +1,11 @@
 # **Automatización del Flujo de Trabajo sobre el Proyecto Final del curso de Introducción a los Mercados Bursátiles con la librería pyportfolioanalytics en Python**
 #### **Realizado por Sebastian Marat Urdanegui Bisalaya**
 
+Perfil de **LinkedIn del autor**: [Link](https://www.linkedin.com/in/sebastianurdaneguibisalaya/)
+
+La librería de **pyportfolioanalytics** en PYPI lo puedes encontrar en el siguiente [Link](https://pypi.org/project/pyportfolioanalytics/0.4.0/)
+
+
 <br>
 
 <div style = "text-align:center">
