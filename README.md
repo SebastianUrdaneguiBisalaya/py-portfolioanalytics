@@ -16,7 +16,7 @@
 <br>
 
 ## **¿Qué te permite hacer la librería pyportfolioanalytics?**
-
+La librería **pyportfolioanalytics** tiene como principal beneficio la agilidad en cuanto a la reducción del tiempo que empleas para analizar datos financieros, brindando como resultado gráficos con respecto a la evolución del precio de cierre, el rendimiento, la volatilidad, la distribución, etc. Además, brinda un reporte financiero en el cual toma en cuenta el precio de adquisición de las acciones del portafolio, el precio de venta, la inversión inicial y los pesos de importancia que el inversionista otorga a cada acción para calcular el beneficio de la operación del inversionista **con tan solo dos líneas de código**. **ES IMPRESIONANTE**.
 
 
 <br>
