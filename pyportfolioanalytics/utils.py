@@ -467,12 +467,13 @@ class BuySellStocks:
 
 class ReportFinancial:
     
-    def __init__(self, stock, start, end, weights, investment):
+    def __init__(self, stock, start, end, weights, investment, authorname):
         self.stock = stock
         self.start = start
         self.end = end
         self.investment = investment
         self.weights = weights
+        self.authorname = authorname
         
     def report(self):
         plot_precio_cierre = get_stock_price_close(self.stock, self.start, self.end)
@@ -492,7 +493,8 @@ class ReportFinancial:
         benefits = bs.benefits_buy_sell_stock()
         benefits_str = return_positive_negative(benefits)
         
-        author = 'Sebastian Marat Urdanegui Bisalaya'
+        #author = 'Sebastian Marat Urdanegui Bisalaya
+        
 
         proyect_directory = os.getcwd()
         path_dir = os.path.join(proyect_directory, 'pdfs')
@@ -515,7 +517,7 @@ class ReportFinancial:
                                     borderColor = colors.black, spaceBefore = 5,
                                     spaceAfter = 5)
 
-        titulo = Paragraph(f'{author}', estilo_titulo)
+        titulo = Paragraph(f'{self.authorname}', estilo_titulo)
         pdf_title = [titulo, Spacer(1,0.05)]
 
         subtitulo = Paragraph("Reporte Financiero - Introducción a los Mercados Bursátiles", estilo_subtitulo)
@@ -649,3 +651,10 @@ class ReportFinancial:
 
 
         pdf.build(pdf_title + pdf_content)
+        
+# if __name__ == "__main__":
+#     reporte = ReportFinancial(["AAPL", "AMZN", "NFLX", "TSLA", "GOOGL", "ABNB"], "2022-01-01", "2023-03-31", [0.2, 0.1, 0.1, 0.25, 0.25, 0.1], 100000, "Sebastian Urdanegui")
+#     reporte.report()
+        
+
+        

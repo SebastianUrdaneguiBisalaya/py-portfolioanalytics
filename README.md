@@ -15,7 +15,9 @@
 <br>
 <br>
 
-## **¿Qué te permite hacer la librería pyfinancialanalysis?**
+## **¿Qué te permite hacer la librería pyportfolioanalytics?**
+
+
 
 <br>
 
@@ -41,7 +43,7 @@ Luego, en la primera línea de código es importante copiar y pegar el siguiente
 Ahora, es hora de instalar la librería <span style = "color:orange">pyportfolioanalytics:<span> <span style = "color:white"><span>
 
 ```python
-pip install pyportfolioanalytics==0.1.0
+pip install pyportfolioanalytics==0.4.0
 ```
 
 Por último, para iniciar a tirar código, debemos importar las librerías que serán necesarias para el trabajo a realizar:
@@ -143,7 +145,7 @@ plot_cov_matrix(["AAPL", "AMZN", "NFLX", "TSLA", "GOOGL", "ABNB"], "2022-01-01",
 
 ```python
 # Este código se encarga de traer la instancia de la clase ReportFinancial con el objetivo de construir automáticamente un reporte financiero con los insights más relevantes
-reporte = ReportFinancial(["AAPL", "AMZN", "NFLX", "TSLA", "GOOGL", "ABNB"], "2022-01-01", "2023-03-31", [0.2, 0.1, 0.1, 0.25, 0.25, 0.1], 100000)
+reporte = ReportFinancial(["AAPL", "AMZN", "NFLX", "TSLA", "GOOGL", "ABNB"], "2022-01-01", "2023-03-31", [0.2, 0.1, 0.1, 0.25, 0.25, 0.1], 100000, "Sebastian Marat Urdanegui Bisalaya")
 reporte.report()
 ```
 
@@ -187,7 +189,7 @@ Desde la consola de CMDER, se puede escribir **code .** para abrir directamente 
 code .
 ```
 
-**!Listo! Puedes instalar las librerías necesarias y escribir el código tal cual se explica desde el paso 1 del método más rápido.**
+**!Listo! Puedes instalar las librerías necesarias y escribir el código tal cual se explica desde el paso 1 del camino más directo.**
 
 
 
