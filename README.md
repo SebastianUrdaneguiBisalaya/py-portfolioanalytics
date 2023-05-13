@@ -41,7 +41,7 @@ Luego, en la primera línea de código es importante copiar y pegar el siguiente
 Ahora, es hora de instalar la librería <span style = "color:orange">pyportfolioanalytics:<span> <span style = "color:white"><span>
 
 ```python
-pip install pyportfolioanalytics==0.0.7
+pip install pyportfolioanalytics==0.1.0
 ```
 
 Por último, para iniciar a tirar código, debemos importar las librerías que serán necesarias para el trabajo a realizar:
@@ -62,23 +62,29 @@ from pyportfolioanalytics.utils import ReportFinancial
 
 **<span style="color:orange">¡Listo!<span> <span style="color:white">Tienes todo lo necesario para realizar un análisis financiero en Python<span>**
 
-### **Caso 1: Obtener los precios de cierre de las acciones de Apple (AAPL), Amazon (AMZN) y Netflix (NFLX) entre el periodo de 2022-01-01 y 2023-03-31**
+### **Caso 1: Obtener los precios de cierre de las acciones de Apple (AAPL), Amazon (AMZN), Netflix (NFLX), TESLA (TSLA), Google (GOOGL) y AIRBNB (ABNB) entre el periodo de 2022-01-01 y 2023-03-31**
 
 ```python
 # Almacenar en una variable los datos que se obtendrán
-dataframe_stock = stock_price_close(stock_list = ["AAPL", "AMZN", "NFLX"], start = "2022-01-01", end = "2023-03-31")
+dataframe_stock = stock_price_close(stock_list = ["AAPL", "AMZN", "NFLX", "TSLA", "GOOGL", "ABNB"], start = "2022-01-01", end = "2023-03-31")
 ```
 
 ### **Output Caso 1**
+
+<div>
+<img src = "./images/df.png" width = "100%" height = "350px">
+<div>
 
 ### **Caso 2: Obtener un gráfico de la evolución de los precios de cierre de las acciones**
 
 ```python
 # Retornará un gráfico de la evolución del precio de cierre en el periodo en cuestión
-plot_price_close(["AAPL", "AMZN", "NFLX"], "2022-01-01", "2023-01-01")
+plot_price_close(["AAPL", "AMZN", "NFLX", "TSLA", "GOOGL", "ABNB"], "2022-01-01", "2023-01-01")
 ```
 
 ### **Output Caso 2**
+
+
 
 ### **Caso 3: Obtener un gráfico del rendimiento de las acciones**
 

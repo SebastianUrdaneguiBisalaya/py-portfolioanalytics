@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 HERE = pathlib.Path(__file__).parent
 
-VERSION = '0.0.7'
+VERSION = '0.2.0'
 PACKAGE_NAME = 'pyportfolioanalytics'
 AUTHOR = 'Sebastian Marat Urdanegui Bisalaya'
 AUTHOR_EMAIL = 'sebasurdanegui@gmail.com'

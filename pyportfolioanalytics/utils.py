@@ -7,6 +7,8 @@ matplotlib.use('Agg')
 import seaborn as sns
 import math
 import os
+# import plotly
+# import plotly.graph_objects as go
 
 from reportlab.lib.pagesizes import A4, inch
 from reportlab.lib import colors
@@ -67,36 +69,28 @@ def return_positive_negative(value):
     
 # Funciones para graficar el análisis financiero y mostrar en el IDE 
 # no almacenarlo en directorio
-def get_plot_price_close(func):
-    def wrapper(*args, **kwargs):
-        stock_dataframe = func(*args, **kwargs)
-        orange_color = sns.color_palette("YlOrBr", as_cmap = False, n_colors=5)
-        sns.set_palette(orange_color)
-        fig, ax = plt.subplots(figsize = (8,6), dpi = 80)
-        stock_dataframe.plot(ax = ax)
-        plt.legend()
-        plt.title("Evolución del precio de cierre de las acciones", size = 15)
-        plt.xlabel("Fecha")
-        plt.ylabel("Precio de las acciones")
-        for i in ['bottom', 'left']:
-            ax.spines[i].set_color('black')
-            ax.spines[i].set_linewidth(1.5) 
-        right_side = ax.spines["right"]
-        right_side.set_visible(False)
-        top_side = ax.spines["top"]
-        top_side.set_visible(False)
-        ax.set_axisbelow(True)
-        ax.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
-        plt.show()
-    return wrapper
-
-@get_plot_price_close
 def plot_price_close(stock_list, start = '2022-01-01', end = '2023-01-01'):
-    stock_dataframe = pd.DataFrame()
-    for stock in stock_list:
-        data = yf.download(stock, start = start, end = end, progress = False)
-        stock_dataframe[stock] = data["Close"]
-    return stock_dataframe
+    stock_dataframe = stock_price_close(stock_list=stock_list, start=start, end=end)
+    orange_color = sns.color_palette("YlOrBr", as_cmap = False, n_colors=5)
+    sns.set_palette(orange_color)
+    fig, ax = plt.subplots(figsize = (8,6), dpi = 80)
+    stock_dataframe.plot(ax = ax)
+    plt.legend()
+    plt.title("Evolución del precio de cierre de las acciones", size = 15)
+    plt.xlabel("Fecha")
+    plt.ylabel("Precio de las acciones")
+    for i in ['bottom', 'left']:
+        ax.spines[i].set_color('black')
+        ax.spines[i].set_linewidth(1.5) 
+    right_side = ax.spines["right"]
+    right_side.set_visible(False)
+    top_side = ax.spines["top"]
+    top_side.set_visible(False)
+    ax.set_axisbelow(True)
+    ax.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
+    plt.show()
+    
+
 
 def histogram_yield(list_stocks, start = '2022-01-01', end = '2023-01-01'):
     return_stock = return_daily(list_stock = list_stocks, start = start, end = end)
@@ -154,6 +148,7 @@ def plot_yield_deviation_mean(list_stocks, start = '2022-01-01', end = '2023-01-
     ax2.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
     plt.title(f'Rendimiento promedio y volatilidad anualizada\nde las acciones', size = 15)
     plt.show()
+    return fig
 
 def plot_cov_matrix(list_stock, start = '2022-01-01', end = '2023-01-01'):
     covmatrix = covariance_matrix(list_stock, start = start, end = end)
@@ -162,6 +157,7 @@ def plot_cov_matrix(list_stock, start = '2022-01-01', end = '2023-01-01'):
     ax = sns.heatmap(covmatrix, cmap = 'Blues', annot = True)
     plt.show()
     
+    
 
 def plot_corr_matrix(list_stock, start = '2022-01-01', end = '2023-01-01'):
     return_stock = return_daily(list_stock, start = start, end = end)
@@ -169,6 +165,7 @@ def plot_corr_matrix(list_stock, start = '2022-01-01', end = '2023-01-01'):
     ax = sns.heatmap(data = return_stock.corr(), annot = True, cmap = 'YlGnBu')
     plt.title("Matriz de Correlación", size = 15)
     plt.show()
+    return fig
     
 
 def plot_logarithmic_yield(list_stock, start = '2022-01-01', end = '2023-01-01'):
@@ -191,6 +188,21 @@ def plot_logarithmic_yield(list_stock, start = '2022-01-01', end = '2023-01-01')
     ax.grid(color='gray', linewidth=1, axis='y', alpha=0.4)
     plt.legend()
     plt.show()
+    return fig
+
+# def stock_chart_candlestick(ticker_name, start_time, end_time):
+#     stock_dataframe = yf.Ticker(ticker_name).history(start = start_time, end = end_time)[["Open", "High", "Low", "Close"]].reset_index()
+    
+#     fig = go.Figure(data = [go.Candlestick(x = stock_dataframe["Date"],
+#                                            open = stock_dataframe["Open"],
+#                                            high = stock_dataframe["High"],
+#                                            low = stock_dataframe["Low"],
+#                                            close = stock_dataframe["Close"])])
+#     fig.update_layout(title = f'Candlestick Price History of {ticker_name}',
+#                       yaxis_title = f'{ticker_name} stock')
+    
+#     fig.show()
+#     return fig
 
 
 # Funciones para graficar el análisis financiero

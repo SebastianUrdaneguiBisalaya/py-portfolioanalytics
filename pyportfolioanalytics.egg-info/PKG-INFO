@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pyportfolioanalytics
-Version: 0.0.7
+Version: 0.2.0
 Summary: Librería para leer ficheros PDFs y extraer la información en formato str
 Home-page: https://github.com/SebastianUrdaneguiBisalaya/py-portfolioanalytics
 Author: Sebastian Marat Urdanegui Bisalaya
